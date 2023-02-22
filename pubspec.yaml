@@ -1,0 +1,23 @@
+name: ilmam_localization
+description: localization for ilmam
+version: 0.0.1
+
+environment:
+  sdk: '>=2.19.0-171.0.dev <3.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_web_plugins:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_localization: ^0.1.10
+  flutter_bloc: ^8.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
