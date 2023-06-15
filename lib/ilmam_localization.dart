@@ -12,7 +12,7 @@ import 'localization/app_localizations_setup.dart';
 import 'logic/locale_cubit.dart';
 
 bool lock = false;
-Widget ilmamMaterialApp({required String title,required bool debugShowCheckedModeBanner,required ThemeData theme,required Widget home}){
+Widget ilmamMaterialApp({RouterConfig<Object>? routerConfig,required String title,required bool debugShowCheckedModeBanner,required ThemeData theme,required Widget home}){
   return BlocBuilder<LocaleCubit, LocaleState>(
     buildWhen: (previousState, currentState) =>
     previousState != currentState,
@@ -21,7 +21,21 @@ Widget ilmamMaterialApp({required String title,required bool debugShowCheckedMod
         BlocProvider.of<LocaleCubit>(context).getLocalLang();
         lock = true;
       }
-      return MaterialApp(
+      if(routerConfig != null){
+        return MaterialApp.router(
+          title: title,
+          debugShowCheckedModeBanner: debugShowCheckedModeBanner,
+          supportedLocales: AppLocalizationsSetup.supportedLocales,
+          localizationsDelegates:
+          AppLocalizationsSetup.localizationsDelegates,
+          localeResolutionCallback:
+          AppLocalizationsSetup.localeResolutionCallback,
+          locale: localeState.locale,
+          routerConfig: routerConfig,
+          theme: theme,
+        );
+      }else {
+        return MaterialApp(
         title: title,
         debugShowCheckedModeBanner: debugShowCheckedModeBanner,
         supportedLocales: AppLocalizationsSetup.supportedLocales,
@@ -33,6 +47,7 @@ Widget ilmamMaterialApp({required String title,required bool debugShowCheckedMod
         home: home,
         theme: theme,
       );
+      }
     },
   );
 }
