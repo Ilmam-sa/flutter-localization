@@ -12,7 +12,7 @@ import 'localization/app_localizations_setup.dart';
 import 'logic/locale_cubit.dart';
 
 bool lock = false;
-Widget ilmamMaterialApp({RouterConfig<Object>? routerConfig,required String title,required bool debugShowCheckedModeBanner,required ThemeData theme,required Widget home}){
+Widget ilmamMaterialApp({List localizationsDelegates=const [],RouterConfig<Object>? routerConfig,required String title,required bool debugShowCheckedModeBanner,required ThemeData theme,required Widget home}){
   return BlocBuilder<LocaleCubit, LocaleState>(
     buildWhen: (previousState, currentState) =>
     previousState != currentState,
@@ -26,8 +26,7 @@ Widget ilmamMaterialApp({RouterConfig<Object>? routerConfig,required String titl
           title: title,
           debugShowCheckedModeBanner: debugShowCheckedModeBanner,
           supportedLocales: AppLocalizationsSetup.supportedLocales,
-          localizationsDelegates:
-          AppLocalizationsSetup.localizationsDelegates,
+        localizationsDelegates:[...localizationsDelegates,...AppLocalizationsSetup.localizationsDelegates],
           localeResolutionCallback:
           AppLocalizationsSetup.localeResolutionCallback,
           locale: localeState.locale,
@@ -39,8 +38,7 @@ Widget ilmamMaterialApp({RouterConfig<Object>? routerConfig,required String titl
         title: title,
         debugShowCheckedModeBanner: debugShowCheckedModeBanner,
         supportedLocales: AppLocalizationsSetup.supportedLocales,
-        localizationsDelegates:
-        AppLocalizationsSetup.localizationsDelegates,
+        localizationsDelegates:[...localizationsDelegates,...AppLocalizationsSetup.localizationsDelegates],
         localeResolutionCallback:
         AppLocalizationsSetup.localeResolutionCallback,
         locale: localeState.locale,
